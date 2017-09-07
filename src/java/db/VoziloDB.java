@@ -28,12 +28,13 @@ public class VoziloDB {
     
     public void addVozilo(Vozilo vozilo) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into vozilo(broj_sasije, tip, model, godina, status) values (?, ?, ?, ?, ? )");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into vozilo(broj_sasije, tip, model, godina, cijena, status) values (?, ?, ?, ?, ?, ? )");
             preparedStatement.setInt(1, vozilo.getBroj_sasije());
             preparedStatement.setString(2, vozilo.getTip());
             preparedStatement.setString(3, vozilo.getModel());            
             preparedStatement.setString(4, vozilo.getGodina());
-            preparedStatement.setString(5, "lager");
+            preparedStatement.setString(5, vozilo.getCijena());
+            preparedStatement.setString(6, "lager");
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,6 +72,7 @@ public class VoziloDB {
                 vozilo.setModel(rs.getString("model"));
                 vozilo.setGodina(rs.getString("godina"));
                 vozilo.setStatus(rs.getString("status"));
+                vozilo.setCijena(rs.getString("cijena"));
                 vozila.add(vozilo);
             }
         } catch (SQLException e) {
@@ -80,10 +82,12 @@ public class VoziloDB {
         return vozila;
     }
 
-    public void changeStatus(Vozilo vozilo, String status) {
+    public String changeStatus(Vozilo vozilo, String status) {
+        String redirectURL="lista_vozila.jsp";
         StrategyContext cont = new StrategyContext();
         cont.setStrategy(new ServiceStrategy());
-        cont.promjeniStatusVozila(vozilo, status);
+        redirectURL = cont.promjeniStatusVozila(vozilo, status);
+        return redirectURL;
     }
     
     public List<String> dohvatiStatuse() {
@@ -105,6 +109,7 @@ public class VoziloDB {
                 vozilo.setModel(rs.getString("model"));
                 vozilo.setGodina(rs.getString("godina"));
                 vozilo.setStatus(rs.getString("status"));
+                vozilo.setCijena(rs.getString("cijena"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,13 +119,14 @@ public class VoziloDB {
 
     public void editVozilo(Vozilo vozilo) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("update vozilo set tip=?, model=?, godina=?, status=?"
+            PreparedStatement preparedStatement = connection.prepareStatement("update vozilo set tip=?, model=?, godina=?, cijena=?, status=?"
                     + "where broj_sasije=?");
             preparedStatement.setString(1, vozilo.getTip());
             preparedStatement.setString(2, vozilo.getModel());            
             preparedStatement.setString(3, vozilo.getGodina());
-            preparedStatement.setString(4, vozilo.getStatus());
-            preparedStatement.setInt(5, vozilo.getBroj_sasije());
+            preparedStatement.setString(4, vozilo.getCijena());
+            preparedStatement.setString(5, vozilo.getStatus());
+            preparedStatement.setInt(6, vozilo.getBroj_sasije());
             preparedStatement.executeUpdate();
  
         } catch (SQLException e) {

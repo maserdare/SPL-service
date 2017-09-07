@@ -17,7 +17,7 @@ public class StrategyContext {
         return strategy.dohvatiPopisStatusa();
     }
     
-    public void promjeniStatusVozila(Vozilo vozilo, String status) {
-        strategy.promjeniStatus(vozilo, status);
+    public String promjeniStatusVozila(Vozilo vozilo, String status) {
+        return strategy.promjeniStatus(vozilo, status);
     }
 }

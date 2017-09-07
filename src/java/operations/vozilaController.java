@@ -57,19 +57,22 @@ public class vozilaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String redirectURL="lista_vozila.jsp";
         Vozilo vozilo = new Vozilo();
         vozilo.setBroj_sasije(Integer.parseInt(request.getParameter("broj_sasije")));
         vozilo.setTip(request.getParameter("tip"));
         vozilo.setModel(request.getParameter("model"));
         vozilo.setGodina(request.getParameter("godina"));
+        vozilo.setCijena(request.getParameter("cijena"));
         vozilo.setStatus(request.getParameter("status"));
         if(voziloDB.checkVozilo(vozilo)){
             voziloDB.editVozilo(vozilo);
-            voziloDB.changeStatus(vozilo, request.getParameter("status"));
+            redirectURL=voziloDB.changeStatus(vozilo, request.getParameter("status"));
         }else{
             voziloDB.addVozilo(vozilo);
         }
-        RequestDispatcher view = request.getRequestDispatcher("lista_vozila.jsp");
+        RequestDispatcher view = request.getRequestDispatcher(redirectURL);
+        request.setAttribute("vozilo", vozilo);
         request.setAttribute("vozila", voziloDB.getAllVozila());
         view.forward(request, response);
     }

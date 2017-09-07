@@ -17,6 +17,7 @@
             Tip <br /> <input type="text" name="tip" value="${vozilo.tip}"  /> <br /> 
             Model :<br /> <input type="text" name="model" value="${vozilo.model}" /> <br /> 
             Godina :<br /> <input type="text" name="godina" value="${vozilo.godina}" /> <br /> 
+            Cijena :<br /> <input type="text" name="cijena" value="${vozilo.cijena}" /> <br /> 
             Status :<br /> <input type="text" name="status" value="${vozilo.status}" readonly="readonly" /> <br /> 
             <input  type="submit" value="Potvrdi" />
         </form>

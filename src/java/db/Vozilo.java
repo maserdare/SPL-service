@@ -10,16 +10,8 @@ package db;
  * @author Mate
  */
 public class Vozilo {
-   String tip, model, status, godina;
+   String tip, model, status, godina, cijena;
    Integer broj_sasije;
-
-    public Integer getBroj_sasije() {
-        return broj_sasije;
-    }
-
-    public void setBroj_sasije(Integer broj_sasije) {
-        this.broj_sasije = broj_sasije;
-    }
 
     public String getTip() {
         return tip;
@@ -37,14 +29,6 @@ public class Vozilo {
         this.model = model;
     }
 
-    public String getGodina() {
-        return godina;
-    }
-
-    public void setGodina(String godina) {
-        this.godina = godina;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -53,5 +37,28 @@ public class Vozilo {
         this.status = status;
     }
 
+    public String getGodina() {
+        return godina;
+    }
+
+    public void setGodina(String godina) {
+        this.godina = godina;
+    }
+
+    public String getCijena() {
+        return cijena;
+    }
+
+    public void setCijena(String cijena) {
+        this.cijena = cijena;
+    }
+
+    public Integer getBroj_sasije() {
+        return broj_sasije;
+    }
+
+    public void setBroj_sasije(Integer broj_sasije) {
+        this.broj_sasije = broj_sasije;
+    }
    
 }
